@@ -15,6 +15,9 @@ thead th {
 table td {
   padding: 15px !important;
 }
+.donation_title {
+  word-break: break-word;
+}
 
 .intro-section {
   background-image: url(../../img/about/aboutus2.jpg);
