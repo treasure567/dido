@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <title>Decentralized Donation Hub :::Request for Donations</title>
+  <meta name="description" content="Developed by BlockWiz" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <link rel="manifest" href="./404.html" />
+  <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png" />
+  <meta name="next-head-count" content="7" />
+  <link rel="stylesheet" href="assets/css/ex-style.css" />
+  <link rel="stylesheet" href="assets/css/general.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+type="application/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/ipfs-mini/dist/index.min.js"></script>
+</head>
+
+<body>
+  <div>
+    <header class="header-area">
+      <div id="sticky-header" class="header_menu_area header_menu_area_2">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-6 col-6">
+              <div class="logo">
+                <a href="./"><img src="img/logo/logo.png" alt="" /></a>
+              </div>
+            </div>
+            <div class="col-xxl-7 col-xl-7 col-lg-9 d-none d-lg-block">
+              <div class="main-menu menu_2 text-center">
+                <nav id="mobile-menu">
+                  <ul>
+                    <li><a href="./">Home</a></li>
+
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/cause">Cause</a></li>
+                    <li><a href="/transaction">Transactions</a></li>
+                    <li><a href="/terms">T&C</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-1 col-md-6 col-6">
+              <div class="header-right d-flex align-items-center justify-content-end">
+                <div class="header-sing d-inline-block d-none d-xl-block">
+                  <a  onclick="connectWallet()"  id="wallet_" class="g_btn hbtn_1 to_right1 rad-30 c_wallet">Connect Wallet<span></span></a>
+                </div>
+                <div class="hamburger-menu menu-bar info-bar d-sm-block ml-20">
+                  <button class="hamburger-btn open-mobile-menu">
+                    <i class="fa fa-bars"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="fix d-lg-none">
+      <div class="side-info">
+        <div class="offset-widget offset-logo mb-30 pb-20">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <a class="mobile_logo" href="/"><img src="img/logo/logo.png" alt="Logo" /></a>
+            </div>
+            <div class="col-4 text-end">
+              <button class="side-info-close">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+       
+        <div class="mobile-menu mean-menu">
+          <ul class="metismenu text-muted" id="metismenu">
+            <li class="active"><a href="/">Home</a></li>
+
+            <li><a href="/about" style="list-style-type: none !important;">About</a></li>
+            <li><a href="/cause">Cause</a></li>
+            <li><a href="/transactions">Transactions</a></li>
+            <li><a href="/terms">T&C</a></li>
+            <li class="mt-20">
+              
+                  <a onclick="connectWallet()" id="mwallet_" class="g_btn hbtn_1  rad-30 c_wallet">Connect Wallet<span></span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header py-3" style="background-color: #263B5C !important; color: #fff;">Donation Request Form</div>
+
+        <div class="card-body">
+          <form action="#" method="post" id="donationForm" enctype="multipart/form-data">
+            <img id="imagePreview" class="image-preview img-thumbnail mb-4" src="./img/donation/look_for_help.png" alt="" style="width: 100%; object-fit: cover; height: 400px; border-radius: 5px;">
+            <div class="form-group mb-4" >
+              <label for="donationTitle" class="mb-2">Provide a title for the donation</label>
+              <input type="text" class="form-control py-3" maxlength="120" minlength="50" id="donationTitle" name="donationTitle" placeholder="Enter donation title" required>
+              <p id="charCount" class="mt-2 mb-4"  style="font-size: 13px;float: right;">120 Characters left</p>
+            </div>
+
+            <div class="form-group mb-4" class="mb-2">
+              <label for="donationDescription">Donation Description</label>
+              <textarea class="form-control py-3" id="donationDescription" name="donationDescription" rows="3" placeholder="Provide description for the donation" required></textarea>
+            </div>
+
+            <div class="form-group mb-4" >
+              <label for="donationLink" class="mb-2">External Link (for evidence)</label>
+              <input type="text" class="form-control py-3" id="donationLink" name="donationLink" placeholder="Enter an external link" required>
+            </div>
+
+            <div class="form-group mb-4">
+              <label for="coverImage" class="mb-2">Upload Cover Image for Donation</label>
+              <input type="file" accept=".jpg, .jpeg, .png" class="form-control " id="coverImage" name="coverImage" onchange="previewImage(event)" required>
+             
+            </div>
+           
+
+            <div class="form-group mb-4">
+              <label for="donationTarget" class="mb-2">Donation Target (in ETH)</label>
+              <input type="number" class="form-control py-3" id="donationTarget" name="donationTarget" placeholder="Provide donation target amount" required>
+            </div>
+
+            <div class="alert alert-info" role="alert">
+              Kindly note that all donations will go to the address you connected via Metamask.
+              <br>
+              Your current address: <span id="currentAddress"></span>
+            </div>
+
+            <button type="submit"  class="btn py-3 px-5 mt-10 mb-20" style="background-color: #263B5C;color: #fff;">Submit Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <footer>
+    <div class="footer_top_area footer_top_2">
+      <div class="footer_top_wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-7 col-sm-7">
+              <div class="footer_widget footer_about ">
+                <div class="footer_logo mb-35">
+                  <a class="animation" href="/"><img src="img/logo/logo_white.png" alt="img" /></a>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-5 col-sm-5">
+              <div class="footer_widget mb-50 pl_15">
+                <div class="footer_widget_title mb-25">
+                  <h4 class="footer_title footer_title_2">Useful links</h4>
+                </div>
+                <div class="footer_links footer_links_2">
+                  <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/cause">Causes for Donation</a></li>
+                    <li><a href="/transactions">Donation Transactions</a></li>
+                    <li><a href="/terms">Terms & Condition</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-7 col-sm-7">
+              <div class="footer_widget mb-50 pl_25">
+
+                <p class="mb-30">
+                  Support decentralized giving with Web3 technology. Experience the benefits of secure cryptocurrency
+                  donations through blockchain technology.
+                </p>
+                <div class="footer_social_2">
+                  <a class="facebook" href="#!"><i class="fab fa-facebook-f"></i></a><a class="twitter"
+                    href="#!"><i class="fab fa-twitter"></i></a><a class="instagram" href="#!"><i
+                      class="fab fa-instagram"></i></a><a class="youtube" href="#!"><i
+                      class="fab fa-youtube"></i></a>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="footer_copyright_area">
+      <div class="container">
+        <div class="row">
+          <div class="col-xxl-12 text-center">
+            <p>
+              Copyright © 2024 All Rights Reserved by
+              <strong><a href="./">BlockWiz</a></strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="./assets/js/main.js"></script>
+
+<script>
+  let name=null;
+  let email=null;
+window.addEventListener('load',(e)=>{
+  e.preventDefault();
+  let url = "https://basic-nada-blockwiz.koyeb.app";
+  fetch(`${url}/api/ping`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    }
+  }).then(response => response.json())
+    .then(data => {
+      console.log(data);
+      name=data.user.name;
+      email=data.user.username;
+      console.log(name);
+      console.log(email);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      window.location.href = "/login";
+    }); 
+})
+console.log("check")
+
+
+        imgBaseUrl = ''
+
+        function encodeImageFileAsURL(element) {
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            imgBaseUrl = reader.result
+          console.log("RESULT", reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      document.querySelector('input[type="file"]').addEventListener('change', function() {
+        encodeImageFileAsURL(this);
+      });
+
+async function handleSubmit(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        const formData = new FormData(event.target); // Get form data
+        const title = formData.get('donationTitle'); // Get the value of the 'name' input field
+        const donationDescription = formData.get('donationDescription'); 
+        const donationTarget = formData.get('donationTarget'); 
+        const donationLink = formData.get('donationLink');
+
+
+
+        console.log(title, donationDescription, donationTarget,name, email , donationLink)
+        // Do something with the form data
+        console.log('Form submitted with name:', name);
+
+
+        const tokens = (n) => {
+            return ethers.utils.parseEther(n);
+        }
+
+      
+        
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        console.log(provider)
+        const network = await provider.getNetwork()
+        console.log(network.chainId)
+
+        if(network.chainId !== 11155420){
+          console.log("Connect to OP sepolia test network");
+          alert("Connect to hardhat local network");
+          return
+        }
+
+        // connect to smart contracts (create js versions)
+        const abi = [
+  { "inputs": [], "stateMutability": "nonpayable", "type": "constructor" },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "from",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Donate",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_recipientAddress",
+        "type": "address"
+      },
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "approveRequestEth",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_donationId", "type": "uint256" },
+      { "internalType": "uint256", "name": "realMoney", "type": "uint256" }
+    ],
+    "name": "donateAddress",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "donated",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "donations",
+    "outputs": [
+      { "internalType": "uint256", "name": "id", "type": "uint256" },
+      { "internalType": "address", "name": "recipient", "type": "address" },
+      { "internalType": "string", "name": "fullname", "type": "string" },
+      { "internalType": "string", "name": "contact", "type": "string" },
+      { "internalType": "string", "name": "email", "type": "string" },
+      { "internalType": "string", "name": "title", "type": "string" },
+      { "internalType": "string", "name": "description", "type": "string" },
+      { "internalType": "string", "name": "links", "type": "string" },
+      { "internalType": "string", "name": "imagesUrl", "type": "string" },
+      { "internalType": "uint256", "name": "target", "type": "uint256" },
+      { "internalType": "uint256", "name": "raised", "type": "uint256" },
+      { "internalType": "bool", "name": "completed", "type": "bool" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "donationsCount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      { "internalType": "address", "name": "", "type": "address" }
+    ],
+    "name": "eachDonated",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "eachTopDonor",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "eachTopDonorAmount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "generalDonate",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "string", "name": "_fullname", "type": "string" },
+      { "internalType": "string", "name": "_contact", "type": "string" },
+      { "internalType": "string", "name": "_email", "type": "string" },
+      { "internalType": "string", "name": "_title", "type": "string" },
+      { "internalType": "string", "name": "_description", "type": "string" },
+      { "internalType": "string", "name": "_links", "type": "string" },
+      { "internalType": "string", "name": "_imagesUrl", "type": "string" },
+      { "internalType": "uint256", "name": "_target", "type": "uint256" },
+      { "internalType": "uint256", "name": "_raised", "type": "uint256" }
+    ],
+    "name": "postDonation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "topDonor",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "topDonorAmount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
+        
+        const dido = new ethers.Contract("0x0290f25EA78E3d85076e085B87787C30567f63f9", abi, provider)
+        // setDappazon(dappazon)
+        console.log(dido)
+
+        const signer = await  provider.getSigner()
+
+        const count = await dido.donationsCount()
+        console.log(count.toNumber())
+        // for (let i = 0; i <= count; i++ ){
+        //     const donation = await dido.donations(i)
+        //     console.log(donation.id);
+        //     console.log(donation.description);
+        // }
+    
+        let target = tokens(donationTarget)
+        console.log(target)
+
+        let raised = tokens("0")
+      
+        let transaction = await dido.connect(signer).postDonation( name,"", email, title, donationDescription, donationLink, "", target, raised) 
+        await transaction.wait()
+
+        const donation = await dido.donations(0)
+        console.log(donation)
+
+        const count2 = await dido.donationsCount()
+        console.log(count2)
+
+    }
+
+    const form =  document.getElementById('donationForm').addEventListener('submit', handleSubmit);
+
+        
+    
+    const donTitle = document.getElementById('donationTitle');
+    const charCount = document.getElementById('charCount');
+
+    donTitle.addEventListener('input', function() {
+      const maxLength = parseInt(donTitle.getAttribute('maxlength'));
+      const currentLength = donTitle.value.length;
+      const remaining = maxLength - currentLength;
+      charCount.textContent = `${remaining} Characters left`;
+    });
+  function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function(){
+      var output = document.getElementById('imagePreview');
+      output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
+  
+  function getAddress() {
+      var data = sessionStorage.getItem('account');
+      return data;
+    }
+
+  var currentAddress = getAddress();
+  document.getElementById('currentAddress').innerText = currentAddress;
+</script>
+
+</body>
+</html>

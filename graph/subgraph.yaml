@@ -1,0 +1,26 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DiDo
+    network: optimism-sepolia
+    source:
+      address: "0x0290f25EA78E3d85076e085B87787C30567f63f9"
+      abi: DiDo
+      startBlock: 10271931
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Donate
+      abis:
+        - name: DiDo
+          file: ./abis/DiDo.json
+      eventHandlers:
+        - event: Donate(address,address,uint256)
+          handler: handleDonate
+      file: ./src/di-do.ts

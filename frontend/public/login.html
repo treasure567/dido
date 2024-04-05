@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js/"">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <title>Decentralized Donation Hub: Login</title>
+    <style>
+      .loader {
+        width: 25px;
+        height: 25px;
+        border: 5px solid rgb(37, 99, 235);
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 col-md-7 intro-section">
+          <div class="brand-wrapper">
+            <a href="./"><img src="img/logo/logo.png" class="logo" alt="" /></a>
+          </div>
+          <div class="intro-content-wrapper">
+            <h1 class="intro-title mb-20">Sign in to Dido !</h1>
+            <p class="intro-text py-3">
+              Welcome to DiDo - Decentralized Donating system, where you can
+              make a significant impact by leveraging cutting-edge blockchain
+              technology to support various causes and initiatives.
+            </p>
+            <a href="/about" class="btn btn-read-more">Read more</a>
+          </div>
+          <div class="intro-section-footer">
+            <na class="footer-nav">
+              <a href="#!">Facebook</a>
+              <a href="#!">Twitter</a>
+              <a href="#!">Gmail</a>
+            </na>
+          </div>
+        </div>
+        <div class="mx-auto col-sm-9 col-md-5 form-section">
+          <div class="login-wrapper">
+            <h2 class="login-title">Sign in</h2>
+            <form action="#!">
+              <div class="form-group">
+                <label for="email" class="sr-only">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="Email"
+                  required
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label for="password" class="sr-only">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Password"
+                  required
+                />
+              </div>
+              <a href="#!" class="forgot-password-link py-3"
+                >Forgot Password?</a
+              >
+              <div
+                class="d-flex justify-content-between align-items-center py-4 mt-2"
+              >
+                <button id="login" class="login-btn btn py-3" type="submit">
+                  Login
+                </button>
+              </div>
+            </form>
+            <p class="login-wrapper-footer-text">
+              Need an account?
+              <a href="signup" class="text-reset">Signup here</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.7.1.js"
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    let url = "https://basic-nada-blockwiz.koyeb.app";
+    let login_button = document.getElementById("login");
+    login_button.addEventListener("click", (e) => {
+      e.preventDefault();
+      var but = $("#login");
+      but.html('<span class="loader"></span>');
+      let password = document.getElementById("password").value;
+      let email = document.getElementById("email").value;
+      fetch(`${url}/api/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: email,
+          password: password,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.access_token != undefined) {
+            window.localStorage.setItem("token", data.access_token);
+            window.location.href = "/";
+          } else {
+            alert("invalid credentials");
+          }
+        })
+        .catch((err) => console.log(err));
+    });
+  </script>
+</html>

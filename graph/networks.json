@@ -1,0 +1,8 @@
+{
+  "optimism-sepolia": {
+    "DiDo": {
+      "address": "0x0290f25EA78E3d85076e085B87787C30567f63f9",
+      "startBlock": 10271931
+    }
+  }
+}
